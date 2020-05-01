@@ -1,0 +1,29 @@
+<configuration>
+<property>
+    <name>tez.lib.uris</name>
+    <value>hdfs://namenode:9000/apps/tez-0.9.2,hdfs://namenode:9000/apps/tez-0.9.2/lib</value>
+    <type>string</type>
+</property>
+<!-- <property>
+    <name>tez.lib.uris.classpath</name>
+    <value>./tez/*:./tez/lib/*:</value>
+    <type>string</type>
+</property> -->
+<!-- <property>
+    <name>tez.use.cluster.hadoop-libs</name>
+    <value>true</value>
+    <type>boolean</type>
+</property> -->
+<property>
+    <name>tez.am.resource.memory.mb</name>
+    <value>4096</value>
+    <type>integer</type>
+</property>
+
+<property>
+    <name>tez.task.resource.memory.mb</name>
+    <value>4096</value>
+    <type>integer</type>
+</property>
+
+</configuration>
