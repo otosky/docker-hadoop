@@ -1,5 +1,5 @@
 # Download & Verify Hadoop
-FROM apache_downloader AS dl
+FROM otosky/apache_downloader:v1.0 AS dl
 
 ENV HADOOP_VERSION 2.10.0
 ENV HADOOP_ASC https://downloads.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz.asc
@@ -33,12 +33,12 @@ RUN mkdir /opt/hadoop-$HADOOP_VERSION/logs
 
 RUN mkdir /hadoop-data
 
-ENV HADOOP_PREFIX=/opt/hadoop-$HADOOP_VERSION
+ENV HADOOP_HOME=/opt/hadoop-$HADOOP_VERSION
 ENV HADOOP_CONF_DIR=/etc/hadoop
 ENV MULTIHOMED_NETWORK=1
 
 ENV USER=root
-ENV PATH $HADOOP_PREFIX/bin/:$PATH
+ENV PATH $HADOOP_HOME/bin/:$PATH
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod a+x /entrypoint.sh
