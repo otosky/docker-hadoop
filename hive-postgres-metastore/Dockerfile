@@ -1,6 +1,6 @@
 FROM postgres:11.7
-
-MAINTAINER "Ivan Ermilov <ivan.s.ermilov@gmail.com>"
+LABEL maintainer="Oliver Tosky" \
+      maintainer-email="olivertosky@gmail.com"
 
 COPY hive-schema-2.3.0.postgres.sql /tmp/
 COPY hive-txn-schema-2.3.0.postgres.sql /tmp/
