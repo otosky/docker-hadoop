@@ -88,9 +88,12 @@ RUN wget https://jdbc.postgresql.org/download/postgresql-42.2.12.jar -P /opt/sqo
 # RUN chmod +x /bin/presto
 
 # SPARK
-ENV SPARK_DIST_CLASSPATH="$(hadoop --config /$HADOOP_CONF_DIR classpath)"
 RUN mkdir /opt/spark-2.4.5
-COPY --from=dl /spark-2.4.5 /opt/spark-2.4.5
+ENV SPARK_HOME /opt/spark-2.4.5
+COPY --from=dl /spark-2.4.5 $SPARK_HOME
+COPY spark-env.sh $SPARK_HOME/conf/
+ENV PATH $SPARK_HOME/bin:$PATH
+ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:$HADOOP_HOME/lib/native
 
 COPY run.sh /
 RUN chmod +x /run.sh
