@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
   namenode:
-    image: hadoop-namenode:2.10.0
+    image: otosky/hadoop-namenode:2.10.0
     container_name: namenode
     ports:
       - 50070:50070
@@ -15,7 +15,7 @@ services:
       - ./hadoop.env
 
   datanode:
-    image: hadoop-datanode:2.10.0
+    image: otosky/hadoop-datanode:2.10.0
     container_name: datanode
     volumes:
       - hadoop_datanode:/hadoop/dfs/data
@@ -25,7 +25,7 @@ services:
       - ./hadoop.env
   
   resourcemanager:
-    image: hadoop-resourcemanager:2.10.0
+    image: otosky/hadoop-resourcemanager:2.10.0
     container_name: resourcemanager
     ports:
       - 8088:8088
@@ -34,8 +34,8 @@ services:
     env_file:
       - ./hadoop.env
 
-  nodemanager1:
-    image: hadoop-nodemanager:2.10.0
+  nodemanager:
+    image: otosky/hadoop-nodemanager:2.10.0
     container_name: nodemanager
     ports:
       - 8042:8042
@@ -45,7 +45,7 @@ services:
       - ./hadoop.env
   
   historyserver:
-    image: hadoop-historyserver:2.10.0
+    image: otosky/hadoop-historyserver:2.10.0
     container_name: historyserver
     ports:
       - 8188:8188
@@ -58,7 +58,7 @@ services:
       - ./hadoop.env
 
   hive-server:
-    image: hadoop-hive:2.10.0
+    image: otosky/hadoop-hive:2.10.0
     container_name: hive-server
     env_file:
       - ./hadoop.env
@@ -70,7 +70,7 @@ services:
       - "10002:10002"
 
   hive-metastore:
-    image: hadoop-hive:2.10.0
+    image: otosky/hadoop-hive:2.10.0
     container_name: hive-metastore
     env_file:
       - ./hadoop.env
@@ -81,7 +81,7 @@ services:
       - "9083:9083"
 
   hive-metastore-postgresql:
-    image: hive-postgres-metastore:11.7
+    image: otosky/hive-postgres-metastore:11.7
     container_name: hive-metastore-postgresql
     environment: 
       POSTGRES_USER: bot
@@ -94,7 +94,7 @@ services:
       start_period: 10s
 
   client:
-    image: hadoop-client:2.10.0
+    image: otosky/hadoop-client:2.10.0
     container_name: hadoop-client
     env_file:
       - ./hadoop.env

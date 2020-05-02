@@ -44,7 +44,7 @@ RUN cd sqoop \
     && rm sqoop-test-1.5.0-SNAPSHOT.jar *.gradle *.bat *.properties build.xml gradlew
 
 ## MAIN
-FROM hadoop-hive:2.10.0
+FROM otosky/hadoop-hive:2.10.0
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
