@@ -60,8 +60,8 @@ RUN mkdir -p /tmp/tez \
 # MAIN
 FROM otosky/hadoop-base:2.10.0
 
-# TEZ 
 ARG TEZ_VERSION
+ENV TEZ_VERSION ${TEZ_VERSION}
 ENV TEZ_HOME=/opt/tez
 ENV TEZ_CONF_DIR=$TEZ_HOME/conf
 
