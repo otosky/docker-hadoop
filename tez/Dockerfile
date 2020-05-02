@@ -1,5 +1,5 @@
 ARG TEZ_VERSION=0.9.2
-FROM apache_downloader AS dl 
+FROM otosky/apache_downloader:v1.0 AS dl 
 ARG TEZ_VERSION
 
 ENV TEZ_URL ${APACHE_URL_PREFIX}tez/${TEZ_VERSION}/apache-tez-${TEZ_VERSION}-src.tar.gz
@@ -11,7 +11,7 @@ RUN curl -O https://downloads.apache.org/tez/KEYS \
     && wget $TEZ_ASC \
     && gpg --verify apache-tez-${TEZ_VERSION}-src.tar.gz.asc
 
-FROM hadoop-base:2.10.0 AS builder
+FROM otosky/hadoop-base:2.10.0 AS builder
 ARG TEZ_VERSION
 RUN mkdir -p /usr/share/man/man1
 ENV JAVA_HOME=/usr/local/openjdk-8/
@@ -58,7 +58,7 @@ RUN mkdir -p /tmp/tez \
     && tar -xvzf tez-$TEZ_VERSION-minimal.tar.gz -C /opt/tez
 
 # MAIN
-FROM hadoop-base:2.10.0
+FROM otosky/hadoop-base:2.10.0
 
 # TEZ 
 ARG TEZ_VERSION

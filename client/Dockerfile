@@ -1,5 +1,5 @@
 ARG HADOOP_VERSION=2.10.0
-FROM apache_downloader AS dl 
+FROM otosky/apache_downloader:v1.0 AS dl 
 
 RUN mkdir pig spark
 ENV PIG_URL https://www.apache.org/dyn/closer.cgi?action=download&filename=pig/pig-0.17.0/pig-0.17.0.tar.gz

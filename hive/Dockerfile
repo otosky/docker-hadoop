@@ -1,5 +1,5 @@
 ARG HIVE_VERSION=2.3.7
-FROM apache_downloader as dl
+FROM otosky/apache_downloader:v1.0 as dl
 ARG HIVE_VERSION
 
 ENV HIVE_URL https://www.apache.org/dyn/closer.cgi?action=download&filename=hive/hive-$HIVE_VERSION/apache-hive-$HIVE_VERSION-bin.tar.gz
@@ -16,7 +16,7 @@ RUN tar -xvzf apache-hive-$HIVE_VERSION-bin.tar.gz -C / \
 	&& wget https://jdbc.postgresql.org/download/postgresql-42.2.12.jar
 
 ## MAIN
-FROM hadoop-tez:2.10.0
+FROM otosky/hadoop-tez:2.10.0
 
 ENV HIVE_HOME /opt/hive
 ENV PATH $HIVE_HOME/bin:$PATH
