@@ -6,6 +6,6 @@ hdfs dfs -mkdir -p /apps/
 hdfs dfs -copyFromLocal /tmp/tez-$TEZ_VERSION /apps/
 
 rm -r /tmp/tez-$TEZ_VERSION
+rm -r /tmp/tez
 
-#$PRESTO_HOME/bin/launcher run
 tail -F /dev/null
