@@ -92,6 +92,7 @@ RUN mkdir /opt/spark-2.4.5
 ENV SPARK_HOME /opt/spark-2.4.5
 COPY --from=dl /spark-2.4.5 $SPARK_HOME
 COPY spark-env.sh $SPARK_HOME/conf/
+COPY spark-defaults.conf $SPARK_HOME/conf/
 ENV PATH $SPARK_HOME/bin:$PATH
 ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:$HADOOP_HOME/lib/native
 
