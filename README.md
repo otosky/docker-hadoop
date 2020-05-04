@@ -23,15 +23,25 @@ To deploy an example HDFS cluster, run:
   docker-compose up -d
 ```
 
-`docker-compose` creates a docker network that can be found by running `docker network list`, e.g. `dockerhadoop_default`.
+Enter into the client container to run commands on the cluster:
+```
+docker exec -it hadoop-client bash
+```
 
-Run `docker network inspect` on the network (e.g. `dockerhadoop_default`) to find the IP the hadoop interfaces are published on. Access these interfaces with the following URLs:
+## Web UIs
 
-* Namenode: http://<dockerhadoop_IP_address>:9870/dfshealth.html#tab-overview
-* History server: http://<dockerhadoop_IP_address>:8188/applicationhistory
-* Datanode: http://<dockerhadoop_IP_address>:9864/
-* Nodemanager: http://<dockerhadoop_IP_address>:8042/node
-* Resource manager: http://<dockerhadoop_IP_address>:8088/
+Ports are exposed for the relevant Web UIs:
+
+* Namenode: http://localhost:50070/
+* YARN Resource manager: http://localhost:8088/
+* History server: http://localhost:8188/
+* Nodemanager: http://localhost:8042/
+* Hive: http://localhost:10002/
+* HBase: http://localhost:16010/
+* Spark: http://localhost:4040/
+* *Note: If running Spark under YARN, the CSS formatting for the UI at port 4040 is broken. You should instead visit via the YARN UI.*
+
+**Note: The UIs will try to reconcile the hostname in hyperlinks as the relevant container names, e.g. "resourcemanager:8088/..." for YARN. This is kind of annoying if you want to bounce around the logs. The hack I've come up with in the meantime is to use the included tampermonkey JS-script to change all the hrefs to reference "localhost".**
 
 ## Configure Environment Variables
 
