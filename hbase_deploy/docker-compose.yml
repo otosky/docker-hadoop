@@ -1,0 +1,45 @@
+version: "3.5"
+
+services:
+  
+  zoo:
+    image: zookeeper:3.4.10
+    container_name: zoo
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=0.0.0.0:2888:3888
+    ports:
+      - 2181:2181
+    networks:
+      - hadoop
+
+  hbase-master:
+    image: otosky/hmaster:2.10.0-1.5.0
+    container_name: hbase-master
+    hostname: hbase-master
+    env_file:
+      - ./hbase-distributed-local.env
+    environment:
+      SERVICE_PRECONDITION: "namenode:50070 datanode:50075 zoo:2181"
+    ports:
+      - 16010:16010
+    networks:
+      - hadoop
+
+  hbase-region:
+    image: otosky/hregionserver:2.10.0-1.5.0
+    container_name: hbase-regionserver
+    hostname: hbase-regionserver
+    env_file:
+      - ./hbase-distributed-local.env
+    environment:
+      HBASE_CONF_hbase_regionserver_hostname: hbase-region
+      SERVICE_PRECONDITION: "namenode:50070 datanode:50075 zoo:2181 hbase-master:16010"
+    ports:
+      - 16030:16030
+    networks:
+      - hadoop
+
+networks:
+  hadoop:
+    external: true
