@@ -2,7 +2,7 @@
 
 # Hadoop Docker
 
-Docker images for running a Hadoop cluster & associated tools.  Adapted from [big-data-europe/docker-hadoop](https://github.com/big-data-europe/docker-hadoop) to have leaner images and updated dependency versions.
+Docker images for running a Hadoop cluster & associated tools.  Adapted from [big-data-europe/docker-hadoop](https://github.com/big-data-europe/docker-hadoop) to have leaner images and updated application releases.
 
 ## Software Versions
 
