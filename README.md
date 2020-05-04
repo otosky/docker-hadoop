@@ -1,13 +1,19 @@
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/big-data-europe/Lobby)
 
-# Changes
-
-Version 2.0.0 introduces uses wait_for_it script for the cluster startup
-
 # Hadoop Docker
 
-## Supported Hadoop Versions
-See repository branches for supported hadoop versions
+Docker images for running a Hadoop cluster & associated tools.  Adapted from [big-data-europe/docker-hadoop](https://github.com/big-data-europe/docker-hadoop) to have leaner images and updated dependency versions.
+
+## Software Versions
+
+| Application | Version |
+|-------------|:-------:|
+| Hadoop      |  2.10.0 |
+| Tez         |  0.9.2  |
+| Pig         |  0.17.0 |
+| Hive        |  2.3.7  |
+| Sqoop       |  1.4.7  |
+| Spark       |  2.4.5  |
 
 ## Quick Start
 
