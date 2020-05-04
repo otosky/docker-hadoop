@@ -23,6 +23,12 @@ To deploy an example HDFS cluster, run:
 docker-compose up -d
 ```
 
+To add Hive/HBase afterwards, run:
+```bash
+docker-compose -f hive_deploy/docker-compose.yml up -d
+docker-compose -f hbase_deploy/docker-compose.yml up -d
+```
+
 Enter into the client container to run commands on the cluster:
 ```bash
 docker exec -it hadoop-client bash
@@ -37,6 +43,13 @@ hdfs dfs -ls /tests
 
 # view output 
 hdfs dfs -cat /tests/part-rest-of-filename-here
+```
+
+Test Spark on YARN:
+```bash
+spark-submit --class org.apache.spark.examples.SparkPi --master yarn --deploy-mode client $SPARK_HOME/examples/jars/spark-examples*.jar
+
+# NOTE: you can also use "cluster" as a --deploy-mode
 ```
 
 ## Web UIs

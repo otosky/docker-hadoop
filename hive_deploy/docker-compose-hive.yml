@@ -1,0 +1,48 @@
+version: "3.5"
+
+services:
+  hive-server:
+    image: otosky/hadoop-hive:2.10.0
+    container_name: hive-server
+    env_file:
+      - ../hadoop.env
+    environment:
+      HIVE_CORE_CONF_javax_jdo_option_ConnectionURL: "jdbc:postgresql://hive-metastore/metastore"
+      SERVICE_PRECONDITION: "hive-metastore:9083"
+    ports:
+      - "10000:10000"
+      - "10002:10002"
+    networks:
+      - hadoop
+
+  hive-metastore:
+    image: otosky/hadoop-hive:2.10.0
+    container_name: hive-metastore
+    env_file:
+      - ../hadoop.env
+    command: /opt/hive/bin/hive --service metastore
+    environment:
+      SERVICE_PRECONDITION: "namenode:50070 datanode:50075 hive-metastore-postgresql:5432"
+    ports:
+      - "9083:9083"
+    networks:
+      - hadoop
+
+  hive-metastore-postgresql:
+    image: otosky/hive-postgres-metastore:11.7
+    container_name: hive-metastore-postgresql
+    environment: 
+      POSTGRES_USER: bot
+      POSTGRES_HOST_AUTH_METHOD: trust
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hiveuser"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - hadoop
+
+networks:
+  hadoop:
+    name: hadoop
