@@ -20,17 +20,7 @@ Docker images for running a Hadoop cluster & associated tools.  Adapted from [bi
 
 To deploy an example HDFS cluster, run:
 ```
-  docker-compose up
-```
-
-Run example wordcount job:
-```
-  make wordcount
-```
-
-Or deploy in swarm:
-```
-docker stack deploy -c docker-compose-v3.yml hadoop
+  docker-compose up -d
 ```
 
 `docker-compose` creates a docker network that can be found by running `docker network list`, e.g. `dockerhadoop_default`.
