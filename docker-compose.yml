@@ -1,4 +1,4 @@
-version: "3.4"
+version: "3.5"
 
 services:
   namenode:
@@ -13,6 +13,8 @@ services:
       - CLUSTER_NAME=test
     env_file:
       - ./hadoop.env
+    networks:
+      - hadoop
 
   datanode:
     image: otosky/hadoop-datanode:2.10.0
@@ -23,6 +25,8 @@ services:
       SERVICE_PRECONDITION: "namenode:50070"
     env_file:
       - ./hadoop.env
+    networks:
+      - hadoop
   
   resourcemanager:
     image: otosky/hadoop-resourcemanager:2.10.0
@@ -33,6 +37,8 @@ services:
       SERVICE_PRECONDITION: "namenode:50070 datanode:50075"
     env_file:
       - ./hadoop.env
+    networks:
+      - hadoop
 
   nodemanager:
     image: otosky/hadoop-nodemanager:2.10.0
@@ -43,6 +49,8 @@ services:
       SERVICE_PRECONDITION: "namenode:50070 datanode:50075 resourcemanager:8088"
     env_file:
       - ./hadoop.env
+    networks:
+      - hadoop
   
   historyserver:
     image: otosky/hadoop-historyserver:2.10.0
@@ -56,6 +64,8 @@ services:
       - hadoop_historyserver:/hadoop/yarn/timeline
     env_file:
       - ./hadoop.env
+    networks:
+      - hadoop
 
   hive-server:
     image: otosky/hadoop-hive:2.10.0
@@ -68,6 +78,8 @@ services:
     ports:
       - "10000:10000"
       - "10002:10002"
+    networks:
+      - hadoop
 
   hive-metastore:
     image: otosky/hadoop-hive:2.10.0
@@ -79,6 +91,8 @@ services:
       SERVICE_PRECONDITION: "namenode:50070 datanode:50075 hive-metastore-postgresql:5432"
     ports:
       - "9083:9083"
+    networks:
+      - hadoop
 
   hive-metastore-postgresql:
     image: otosky/hive-postgres-metastore:11.7
@@ -92,6 +106,8 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+    networks:
+      - hadoop
 
   client:
     image: otosky/hadoop-client:2.10.0
@@ -104,8 +120,14 @@ services:
       - "5432:5432"
     environment:
       SERVICE_PRECONDITION: "historyserver:8188 hive-server:10000"
+    networks:
+      - hadoop
 
 volumes:
   hadoop_namenode:
   hadoop_datanode:
   hadoop_historyserver:
+
+networks:
+  hadoop:
+    name: hadoop
