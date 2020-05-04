@@ -34,6 +34,8 @@ Enter into the client container to run commands on the cluster:
 docker exec -it hadoop-client bash
 ```
 
+## Basic Tests
+
 The inevitable word-count example to test Tez:
 ```bash
 hadoop jar $TEZ_HOME/tez-examples-0.9.2.jar orderedwordcount /apps/tez-0.9.2/LICENSE /tests/
@@ -49,7 +51,7 @@ Test Spark on YARN:
 ```bash
 spark-submit --class org.apache.spark.examples.SparkPi --master yarn --deploy-mode client $SPARK_HOME/examples/jars/spark-examples*.jar
 
-# NOTE: you can also use "cluster" as a --deploy-mode
+# NOTE: you can also use "cluster" as a --deploy-modeg
 ```
 
 ## Web UIs
