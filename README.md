@@ -19,13 +19,24 @@ Docker images for running a Hadoop cluster & associated tools.  Adapted from [bi
 ## Quick Start
 
 To deploy an example HDFS cluster, run:
-```
+```bash
   docker-compose up -d
 ```
 
 Enter into the client container to run commands on the cluster:
-```
+```bash
 docker exec -it hadoop-client bash
+```
+
+The inevitable word-count example to test Tez:
+```bash
+hadoop jar $TEZ_HOME/tez-examples-0.9.2.jar orderedwordcount /apps/tez-0.9.2/LICENSE /tests/
+
+# the output can be found in HDFS via
+hdfs dfs -ls /tests
+
+# view output 
+hdfs dfs -cat /tests/part-rest-of-filename-here
 ```
 
 ## Web UIs
