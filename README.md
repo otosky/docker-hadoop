@@ -51,7 +51,7 @@ Test Spark on YARN:
 ```bash
 spark-submit --class org.apache.spark.examples.SparkPi --master yarn --deploy-mode client $SPARK_HOME/examples/jars/spark-examples*.jar
 
-# NOTE: you can also use "cluster" as a --deploy-modeg
+# NOTE: you can also use "cluster" as a --deploy-mode
 ```
 
 ## Web UIs
