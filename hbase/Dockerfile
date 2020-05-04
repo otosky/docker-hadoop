@@ -35,11 +35,9 @@ ARG HBASE_VERSION
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     net-tools \
     curl \
-    netcat \
-    && mkdir -p /opt/hbase
+    netcat
 
 COPY --from=build /hbase-${HBASE_VERSION} /opt/hbase-${HBASE_VERSION}
-
 
 RUN ln -s /opt/hbase-$HBASE_VERSION/conf /etc/hbase
 RUN mkdir /opt/hbase-$HBASE_VERSION/logs
