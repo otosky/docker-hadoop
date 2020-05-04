@@ -25,8 +25,8 @@ docker-compose up -d
 
 To add Hive/HBase afterwards, run:
 ```bash
-docker-compose -f hive_deploy/docker-compose.yml up -d
-docker-compose -f hbase_deploy/docker-compose.yml up -d
+docker-compose -f docker-compose-hive.yml up -d
+docker-compose -f docker-compose-hbase.yml up -d
 ```
 
 Enter into the client container to run commands on the cluster:
@@ -53,6 +53,13 @@ spark-submit --class org.apache.spark.examples.SparkPi --master yarn --deploy-mo
 $SPARK_HOME/examples/jars/spark-examples*.jar
 
 # NOTE: you can also use "cluster" as a --deploy-mode
+```
+
+## Clean Up
+
+```bash
+# persist the volumes by removing the "-v" flag
+docker-compose down -v --remove-orphans
 ```
 
 ## Web UIs
