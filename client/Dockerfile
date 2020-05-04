@@ -44,15 +44,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python-minimal \
     && rm -rf /var/lib/apt/lists/*
 
-#RUN git clone https://github.com/apache/sqoop.git
 COPY --from=dl /sqoop-1.4.7 /sqoop-1.4.7
-# RUN cd sqoop-1.4.7 \
-#     && sed -i "s/hadoop.version=.*/hadoop.version=$HADOOP_VERSION/" ivy/libraries.properties \
-#     && sed -i "s/hadoopVersion=.*/hadoopVersion=$HADOOP_VERSION/" gradle.properties \
-#     && ./gradlew package -x test -x realDocs -x compileTestJava -x doc -x javadoc \
-#     && cd build/sqoop-1.4.7.bin__hadoop-$HADOOP_VERSION \
-#     && rm -r testdata src gradle config\
-#     && rm sqoop-test-1.5.0-SNAPSHOT.jar *.gradle *.bat *.properties build.xml gradlew
 
 RUN cd sqoop-1.4.7 \
     && sed -i "s/hadoop.version=.*/hadoop.version=$HADOOP_VERSION/" ivy/libraries.properties \
@@ -82,7 +74,6 @@ ENV PIG_HOME=/opt/pig-0.17.0
 ENV PATH=$PATH:$PIG_HOME/bin
 ENV PIG_CLASSPATH=$HADOOP_CONF_DIR:$HADOOP_CLASSPATH
 ENV PIG_OPTS=-Dpig.logfile=/tmp/pig_logs.log
-#RUN sed -i "s/tez.version=0.7.0/tez.version=$TEZ_VERSION/" $PIG_HOME/ivy/libraries.properties
 
 # SQOOP
 ENV SQOOP_HOME=/opt/sqoop
@@ -97,6 +88,8 @@ RUN wget https://jdbc.postgresql.org/download/postgresql-42.2.12.jar -P /opt/sqo
     rm -r /mysql-connector-java-8.0.19
 
 # PRESTO
+RUN wget https://repo1.maven.org/maven2/io/prestosql/presto-cli/332/presto-cli-332-executable.jar -O /bin/presto \
+    && chmod +x /bin/presto
 # ADD presto-server-332.tar.gz /opt/
 # RUN mv /opt/presto-server-332 /opt/presto
 # RUN mkdir /opt/presto/etc
@@ -104,9 +97,6 @@ RUN wget https://jdbc.postgresql.org/download/postgresql-42.2.12.jar -P /opt/sqo
 
 # ENV PRESTO_HOME=/opt/presto
 
-# COPY presto-cli-332-executable.jar /bin
-# RUN mv /bin/presto-cli-332-executable.jar /bin/presto
-# RUN chmod +x /bin/presto
 
 # SPARK
 RUN mkdir /opt/spark-2.4.5
