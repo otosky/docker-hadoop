@@ -20,7 +20,7 @@ Docker images for running a Hadoop cluster & associated tools.  Adapted from [bi
 
 To deploy an example HDFS cluster, run:
 ```bash
-  docker-compose up -d
+docker-compose up -d
 ```
 
 Enter into the client container to run commands on the cluster:
@@ -52,7 +52,7 @@ Ports are exposed for the relevant Web UIs:
 * Spark: http://localhost:4040/
 * *Note: If running Spark under YARN, the CSS formatting for the UI at port 4040 is broken. You should instead visit via the YARN UI.*
 
-**Note: The UIs will try to reconcile the hostname in hyperlinks as the relevant container names, e.g. "resourcemanager:8088/..." for YARN. This is kind of annoying if you want to bounce around the logs. The hack I've come up with in the meantime is to use the included tampermonkey JS-script to change all the hrefs to reference "localhost".**
+**Note: The UIs will try to reconcile the hostname in hyperlinks as the relevant container names, e.g. "resourcemanager:8088/..." for YARN. This is kind of annoying if you want to bounce around the logs. The hack I've come up with in the meantime is to use the included tampermonkey JS-script to change all the hrefs to reference "localhost".  This doesn't always work if the redirects are proxied, however.**
 
 ## Configure Environment Variables
 
