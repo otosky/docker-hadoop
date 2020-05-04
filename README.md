@@ -7,7 +7,7 @@ Docker images for running a Hadoop cluster & associated tools.  Adapted from [bi
 ## Software Versions
 
 | Application | Version |
-|------------:|:-------:|
+|:-----------:|:-------:|
 | Hadoop      |  2.10.0 |
 | Tez         |  0.9.2  |
 | Pig         |  0.17.0 |
